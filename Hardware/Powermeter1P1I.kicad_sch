@@ -1017,6 +1017,151 @@
 				)
 			)
 		)
+		(symbol "Switch:SW_Push"
+			(pin_numbers hide)
+			(pin_names
+				(offset 1.016) hide)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "SW"
+				(at 1.27 2.54 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(justify left)
+				)
+			)
+			(property "Value" "SW_Push"
+				(at 0 -1.524 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Datasheet" "~"
+				(at 0 5.08 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "Description" "Push button switch, generic, two pins"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(property "ki_keywords" "switch normally-open pushbutton push-button"
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "SW_Push_0_1"
+				(circle
+					(center -2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 1.27) (xy 0 3.048)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 1.27) (xy -2.54 1.27)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 2.032 0)
+					(radius 0.508)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at -5.08 0 0)
+					(length 2.54)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 0 180)
+					(length 2.54)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+		)
 		(symbol "Techbeard:T60404-N4646-X950"
 			(exclude_from_sim no)
 			(in_bom yes)
@@ -1826,13 +1971,15 @@
 		(color 0 0 0 0)
 		(uuid "c88f15f3-daaa-4f1b-b175-aead72222c12")
 	)
-	(no_connect
-		(at 74.93 119.38)
-		(uuid "20ab1c4c-6ed1-4b72-b40b-6f1048919c12")
+	(junction
+		(at 148.59 129.54)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "cb0f1a9d-8178-48f1-af98-46faf380abe1")
 	)
 	(no_connect
 		(at 74.93 99.06)
-		(uuid "25419dc3-a413-4b78-b002-5e668488d588")
+		(uuid "59f0111f-139a-4b5f-80a6-bab42dbc4857")
 	)
 	(no_connect
 		(at 67.31 165.1)
@@ -1908,6 +2055,16 @@
 	)
 	(wire
 		(pts
+			(xy 148.59 119.38) (xy 148.59 120.65)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "22481db2-532f-4672-8a03-094060ec90bf")
+	)
+	(wire
+		(pts
 			(xy 187.96 133.35) (xy 187.96 134.62)
 		)
 		(stroke
@@ -1925,6 +2082,16 @@
 			(type default)
 		)
 		(uuid "2306fc48-1713-4897-9fa5-0830c82d4a3f")
+	)
+	(wire
+		(pts
+			(xy 148.59 129.54) (xy 148.59 130.81)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2add49af-f3b7-4330-9b38-5636ded3ee72")
 	)
 	(wire
 		(pts
@@ -2008,6 +2175,16 @@
 	)
 	(wire
 		(pts
+			(xy 148.59 128.27) (xy 148.59 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "84861bce-ef5d-4ce8-9e6d-b5cc9799bb46")
+	)
+	(wire
+		(pts
 			(xy 97.79 27.94) (xy 99.06 27.94)
 		)
 		(stroke
@@ -2015,6 +2192,16 @@
 			(type default)
 		)
 		(uuid "8c916c79-fe48-495b-a738-cfe566092539")
+	)
+	(wire
+		(pts
+			(xy 148.59 129.54) (xy 152.4 129.54)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8e7ba7e4-7cfc-4436-9499-0ec7640e1635")
 	)
 	(wire
 		(pts
@@ -2268,6 +2455,27 @@
 		)
 		(uuid "55c28342-1265-4f98-ad19-4a1da55a8ade")
 	)
+	(text_box "Button"
+		(exclude_from_sim no)
+		(at 133.35 109.22 0)
+		(size 30.48 3.81)
+		(stroke
+			(width -0.0001)
+			(type solid)
+		)
+		(fill
+			(type color)
+			(color 255 255 0 1)
+		)
+		(effects
+			(font
+				(face "KiCad Font")
+				(size 1.905 1.905)
+				(color 0 0 0 1)
+			)
+		)
+		(uuid "880d4b89-5cb6-44f3-9828-2f278513f301")
+	)
 	(text_box "Diff Current Mes"
 		(exclude_from_sim no)
 		(at 85.09 17.78 0)
@@ -2307,6 +2515,28 @@
 					(size 1.27 1.27)
 				)
 				(justify right)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Button"
+		(shape input)
+		(at 74.93 119.38 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0b3c6fc7-f72e-4759-abbe-e6ab10a9efd2")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 84.0836 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
 				(hide yes)
 			)
 		)
@@ -2368,6 +2598,28 @@
 		(uuid "242076ba-1280-45e7-9137-b5377905dbd8")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
 			(at 82.5114 114.3 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+				(hide yes)
+			)
+		)
+	)
+	(global_label "Button"
+		(shape input)
+		(at 152.4 129.54 0)
+		(fields_autoplaced yes)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "2c3e74b6-e6cc-435d-97bf-84a7bb3875fc")
+		(property "Intersheetrefs" "${INTERSHEET_REFS}"
+			(at 161.5536 129.54 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3152,6 +3404,72 @@
 		)
 	)
 	(symbol
+		(lib_id "power:+5V")
+		(at 148.59 119.38 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "2e8c8d73-ead3-48f2-9645-9b5eb21b2aa5")
+		(property "Reference" "#PWR054"
+			(at 148.59 123.19 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "+5V"
+			(at 148.59 115.57 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 148.59 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 148.59 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 148.59 119.38 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "407bd6c6-88f4-4e18-81ef-6e8b7be20423")
+		)
+		(instances
+			(project "Powermeter1P1I"
+				(path "/3d327883-6be0-4927-9186-8cfb9ef64fd1"
+					(reference "#PWR054")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:C")
 		(at 68.58 81.28 0)
 		(unit 1)
@@ -3640,6 +3958,76 @@
 		)
 	)
 	(symbol
+		(lib_id "Switch:SW_Push")
+		(at 148.59 135.89 90)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "7bb917a8-3afd-4097-be48-ce4464736ba1")
+		(property "Reference" "SW1"
+			(at 149.86 134.6199 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Value" "SW_Push"
+			(at 149.86 137.1599 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" "LCSC:SW-SMD_TS24CA"
+			(at 143.51 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 143.51 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Push button switch, generic, two pins"
+			(at 148.59 135.89 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "c80dfcd6-c276-4e37-856a-1ad2fce53e94")
+		)
+		(pin "2"
+			(uuid "ac9d4709-a99c-4e9f-b683-9a9509075455")
+		)
+		(instances
+			(project ""
+				(path "/3d327883-6be0-4927-9186-8cfb9ef64fd1"
+					(reference "SW1")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "Device:LED_ARGB")
 		(at 193.04 128.27 90)
 		(unit 1)
@@ -3710,6 +4098,72 @@
 			(project "Powermeter1P1I"
 				(path "/3d327883-6be0-4927-9186-8cfb9ef64fd1"
 					(reference "D6")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "power:GND")
+		(at 148.59 140.97 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "847c0bfe-b721-4a97-8750-3b1c5511ea88")
+		(property "Reference" "#PWR055"
+			(at 148.59 147.32 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Value" "GND"
+			(at 148.59 146.05 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Footprint" ""
+			(at 148.59 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 148.59 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" ""
+			(at 148.59 140.97 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "33075e30-28d8-42db-820b-795538e51c96")
+		)
+		(instances
+			(project "Powermeter1P1I"
+				(path "/3d327883-6be0-4927-9186-8cfb9ef64fd1"
+					(reference "#PWR055")
 					(unit 1)
 				)
 			)
@@ -3915,6 +4369,75 @@
 			(project "Powermeter1P1I"
 				(path "/3d327883-6be0-4927-9186-8cfb9ef64fd1"
 					(reference "C4")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Device:R")
+		(at 148.59 124.46 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "b8170d00-32bd-4373-b06a-b6152cb8b219")
+		(property "Reference" "R27"
+			(at 146.558 126.492 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Value" "4k7"
+			(at 144.78 126.492 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify left)
+			)
+		)
+		(property "Footprint" "Resistor_SMD:R_0402_1005Metric"
+			(at 146.812 124.46 90)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" "~"
+			(at 148.59 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 148.59 124.46 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "1"
+			(uuid "f89f4391-9384-4b5e-9deb-b42f620830da")
+		)
+		(pin "2"
+			(uuid "bf4f015c-414d-46f2-bd61-ed80d939d725")
+		)
+		(instances
+			(project "Powermeter1P1I"
+				(path "/3d327883-6be0-4927-9186-8cfb9ef64fd1"
+					(reference "R27")
 					(unit 1)
 				)
 			)
