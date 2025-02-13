@@ -3853,7 +3853,7 @@
 		(descr "Resistor SMD 0402 (1005 Metric), square (rectangular) end terminal, IPC_7351 nominal, (Body size source: IPC-SM-782 page 72, https://www.pcb-3d.com/wordpress/wp-content/uploads/ipc-sm-782a_amendment_1_and_2.pdf), generated with kicad-footprint-generator")
 		(tags "resistor")
 		(property "Reference" "R27"
-			(at 0 1.17 360)
+			(at 0 1.17 0)
 			(layer "B.SilkS")
 			(uuid "c0bdffdf-bb39-4e11-b311-95486aa35659")
 			(effects
@@ -3865,7 +3865,7 @@
 			)
 		)
 		(property "Value" "4k7"
-			(at 0 -1.17 360)
+			(at 0 -1.17 0)
 			(layer "B.Fab")
 			(uuid "4f38eb00-12af-4ffb-8048-07703be09af3")
 			(effects
@@ -4024,7 +4024,7 @@
 			(uuid "63646b64-dde3-492e-bddc-91d1cc67ced5")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "B.Fab")
 			(uuid "ade00517-095a-45ee-8ae8-dac3a2a49047")
 			(effects
@@ -16638,7 +16638,7 @@
 		(uuid "ecdb1729-be94-4a21-b446-300177a123aa")
 		(at 149.7584 124.9608)
 		(property "Reference" "SW1"
-			(at 0 4.77 360)
+			(at 0 4.77 0)
 			(layer "B.SilkS")
 			(uuid "9f053c53-f284-476c-aeba-33c7b70c3d2c")
 			(effects
@@ -16650,7 +16650,7 @@
 			)
 		)
 		(property "Value" "SW_Push"
-			(at 0 -4.77 360)
+			(at 0 -4.77 0)
 			(layer "B.Fab")
 			(uuid "5757180d-c7de-48b4-9d15-8fc3d15f839c")
 			(effects
@@ -16662,7 +16662,7 @@
 			)
 		)
 		(property "Footprint" "LCSC:SW-SMD_TS24CA"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "78653abb-db87-4460-a62c-cdcf3d1c7747")
@@ -16675,7 +16675,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "ec5fa599-83fb-4470-a0c5-6f69ed939947")
@@ -16688,7 +16688,7 @@
 			)
 		)
 		(property "Description" "Push button switch, generic, two pins"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "B.Fab")
 			(hide yes)
 			(uuid "ef9387ee-01ad-4392-8301-8daaefe78373")
@@ -16808,7 +16808,7 @@
 			(uuid "ecb6d7f4-c504-4943-82bb-437b37a5077c")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 0 360)
+			(at 0 0 0)
 			(layer "B.Fab")
 			(uuid "d7602842-f0fd-4cd4-936b-af49ad19fb42")
 			(effects
@@ -18120,28 +18120,6 @@
 		(layer "B.Cu")
 		(net 6)
 		(uuid "a478c1cf-2b9c-4894-b566-bed8f0889172")
-	)
-	(gr_arc
-		(start 124.8156 83.1596)
-		(mid 119.566859 88.016055)
-		(end 114.3885 83.084622)
-		(stroke
-			(width 0.2)
-			(type dash)
-		)
-		(layer "B.Cu")
-		(uuid "af44d8a9-dc3c-4b83-93f7-b0cb0564d265")
-	)
-	(gr_arc
-		(start 123.799599 83.947)
-		(mid 119.640268 87.14317)
-		(end 115.428844 84.015961)
-		(stroke
-			(width 0.2)
-			(type dash)
-		)
-		(layer "B.Cu")
-		(uuid "e692b693-1951-4df1-a512-b3050624bd55")
 	)
 	(gr_poly
 		(pts
