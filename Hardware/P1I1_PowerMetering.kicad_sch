@@ -4750,10 +4750,9 @@
 		(in_bom yes)
 		(on_board yes)
 		(dnp no)
-		(fields_autoplaced yes)
 		(uuid "1e59b0fe-07c9-4d9d-8ccc-d98b62f3889d")
 		(property "Reference" "U7"
-			(at 205.3941 87.63 0)
+			(at 207.01 114.046 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -4761,8 +4760,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "~"
-			(at 205.3941 90.17 0)
+		(property "Value" "CA-IS3541"
+			(at 207.01 116.84 0)
 			(effects
 				(font
 					(size 1.27 1.27)
