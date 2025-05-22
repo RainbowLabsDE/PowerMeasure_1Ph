@@ -125,8 +125,8 @@ uint16_t BL0942::read_FREQ() {
     return val;
 }
 
-// SystemStatus BL0942::read_STATUS()
-// {
-//     SystemStatus test;
-//     return test;
-// }
+BL0942::SystemStatus_t BL0942::read_STATUS() {
+    int32_t val = readVal(STATUS, 10);
+    SystemStatus_t* retVal = (SystemStatus_t*)&val;
+    return *retVal;
+}

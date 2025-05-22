@@ -2,7 +2,6 @@
 #define BL0942_H
 
 #include "spi.h"
-#include <vector>
 
 
 class BL0942
@@ -11,23 +10,36 @@ public:
     BL0942(SPI &spi);
     
 
-    struct SystemStatus
+    typedef struct SystemStatus
     {
-        uint8_t CF_REVP_F;  // This bit indicates the direction of the last energy Pulse CF - 0: active forward; 1: active reverse
-        uint8_t CREEP_F;    // This bit indicates whether the BL0942 is in active power no-load status - 0: not active power no-load state; 1: active power no-load state
-        uint8_t I_ZX_LTH_F; // This bit indicates the current signal is below zero crossing current detection threshold
-        uint8_t V_ZX_LTH_F; // This bit indicates the current signal is below zero crossing current detection threshold
-    };
+        uint8_t CF_REVP_F : 1;  // This bit indicates the direction of the last energy Pulse CF - 0: active forward; 1: active reverse
+        uint8_t CREEP_F : 1;    // This bit indicates whether the BL0942 is in active power no-load status - 0: not active power no-load state; 1: active power no-load state
+        uint8_t : 6;
+        uint8_t I_ZX_LTH_F : 1; // This bit indicates the current signal is below zero crossing current detection threshold
+        uint8_t V_ZX_LTH_F : 1; // This bit indicates the current signal is below zero crossing current detection threshold
+    } SystemStatus_t;
 
-    int32_t read_I_WAVE();      // Current waveform data, signed
-    int32_t read_V_WAVE();      // Voltage waveform data, signed
-    uint32_t read_I_RMS();      // Current RMS, unsigned
-    uint32_t read_V_RMS();      // Voltage RMS, unsigned
-    uint32_t read_I_FAST_RMS(); // Current fast RMS, unsigned
-    int32_t read_WATT();        // Active power, signed
-    uint32_t read_CF_CNT();     // Active energy pulse counter, unsigned
-    uint16_t read_FREQ();       // Line voltage frequency
-    // SystemStatus read_STATUS(); // System Status
+    typedef struct {
+        uint8_t : 2;
+        uint8_t CF_EN : 1;              // Active energy and pulse output Enable
+        uint8_t RMS_UPDATE_SEL : 1;     // Selection of refresh time for RMS
+        uint8_t : 1;
+        uint8_t AC_FREQ_SEL : 1;        // Selection of AC frequency
+        uint8_t CF_CNT_CLR_SEL : 1;     // Clear after read of CF_CNT register Enable
+        uint8_t CF_CNT_ADD_SEL : 1;     // Mode selection of active energy pulse accumulation
+        uint8_t UART_RATE_SEL : 2;      // Baud rate selection
+        uint8_t : 8;
+    } UserMode_t;
+
+    int32_t read_I_WAVE();          // Current waveform data, signed
+    int32_t read_V_WAVE();          // Voltage waveform data, signed
+    uint32_t read_I_RMS();          // Current RMS, unsigned
+    uint32_t read_V_RMS();          // Voltage RMS, unsigned
+    uint32_t read_I_FAST_RMS();     // Current fast RMS, unsigned
+    int32_t read_WATT();            // Active power, signed
+    uint32_t read_CF_CNT();         // Active energy pulse counter, unsigned
+    uint16_t read_FREQ();           // Line voltage frequency
+    SystemStatus_t read_STATUS();   // System Status
 
 
 
