@@ -1,42 +1,48 @@
 #include "debug.h"
 #include "uart.h"
 #include "util.h"
-// #include "config.h"
-// #include "../../common/RBLB/rblb.h"
 #include "adc.h"
-#include "modbus_lib.h"
-// #include "modbus_lib-master/modbus_lib.h"
-// #include "../modbus_lib-master/modbus_lib.h"
-// vu8 val;
-// Config config;
+#include "spi.h"
+#include "BL0942.h"
 
-// R  - T1CH3 - PC0
-// G  - T1CH1 - PC6 | WS2812 DOUT
-// B  - T1CH2 - PC7
-// W  - T1CH4 - PD3
-// WW - T2CH2 - PD4
+
+extern "C"
+{
+#include "modbus_lib.h"
+}
+
+
+/********* Modbus *********/
 // TX - PD5
 // RX - PD6
-// LED1 - PC1
-// LED2 - PC2
-// DE - PC4
-// RE - PC5 (active low)
-// VBUS - PC3 - A?? (wrong pin?) -> PA2 (A0)
-// TEMP - PD2 - A3
+// DE - PD3
+// RE - PD2 (active low)
+/********* Led und Button **********/
+// State LED R - PC1
+// State LED G - PC1
+// State LED B - PC1
+// Button - PD0
+/********* Stommessung *********/
+// OP_neg - PA1
+// OP_pos - PA2
+// OP_out - PD4
+/********* Powermonitoring *********/
+// SCLK - PC5
+// MOSI - PC6
+// MISO - PC7
+// CS - PC1
 
 #define PIN_LED1 GPIOC, GPIO_Pin_1
 #define PIN_LED2 GPIOC, GPIO_Pin_2
-#define PIN_RS485_DE GPIOC, GPIO_Pin_4
-#define PIN_RS485_RE GPIOC, GPIO_Pin_5
+#define PIN_RS485_DE GPIOD, GPIO_Pin_3
+#define PIN_RS485_RE GPIOD, GPIO_Pin_2
 
 #define NO_DATA_TIMEOUT 2000
 
-// #define LED_DATA_BUF_SIZE   600     // also used for the internal RBLB buffer size (for double buffering)
-// uint8_t ledData[LED_DATA_BUF_SIZE] = {0};
+SPI spi;
+
 
 uint32_t lastDataReceived = 0;
-
-
 
 // #if VARIANT_PWM
 
@@ -325,22 +331,12 @@ uint16_t modbus_lib_write_handler(uint16_t la, uint16_t value)
     return MBUS_RESPONSE_OK; // data is successfully written
 }
 
-void USART2_idleHandler(void) // TODO muss noch implemetiert werden
-{
-    modbus_lib_end_of_telegram();
-}
-
 int modbus_lib_transport_write(uint8_t *buffer, uint16_t length)
 {
-    rs485Write(buffer,length);
+    rs485Write(buffer, length);
     return 0;
 }
 
-
-
-// TODO: somehow move buffer definition into class itself, maybe via templating? (but still show in memory usage)
-// uint8_t internalLedDataBuf[LED_DATA_BUF_SIZE] = {0};
-// RBLB rblb(rs485Write, rblbPacketCallback, millis, internalLedDataBuf, LED_DATA_BUF_SIZE);
 
 int main(void)
 {
@@ -364,6 +360,8 @@ int main(void)
     // #endif
     adcInit();
     // config.load();
+    spi.begin(SPI::MASTER_MODE,GPIOC,GPIO_Pin_1);
+    BL0942 bl(spi);
 
     // rblb.setUid(getUID());
     // rblb.setDataCallback(rblbDataCallback);
@@ -382,21 +380,14 @@ int main(void)
         size_t bytesRead = uart1.readBytes(serBuf, sizeof(serBuf)); // takes ~2us when not doing anything. When copying data, up to 10us was seen
         for (size_t i = 0; i < bytesRead; i++)
         {
-            // rblb.handleByte(serBuf[i]);     // takes 2.8us for data bytes (and ~ 2.5us for header bytes), TODO: optimize
             modbus_lib_append_data(serBuf[i]); // append byte-by-byte
         }
         // rblb.loop();
 
-        // if (millis() - lastDataReceived >= NO_DATA_TIMEOUT) {
-        //     lastDataReceived = millis(); // don't repeat too often
-        //     #if VARIANT_PWM
-        //         // setPwmOutputs(0, 0, 0, 0, 0, 0);
-        //     #endif
-        //     #if VARIANT_WS2812
-        //         memset(ledData, 0, sizeof(ledData));
-        //         WS2812BDMAStart(LED_DATA_BUF_SIZE / 3); // set to black
-        //     #endif
-        // }
+        if (millis() - lastDataReceived >= NO_DATA_TIMEOUT){
+            lastDataReceived = millis();
+            modbus_lib_end_of_telegram();
+        }
 
         // GPIO_WriteBit(PIN_LED1, Bit_SET);
         // delay(100);
@@ -415,5 +406,4 @@ extern "C"
     // needed for C++ compatibility, apparently
     void _fini() {}
     void _init() {}
-    // void modbus_lib_init(ModbusConfig_t*) {}
 }
