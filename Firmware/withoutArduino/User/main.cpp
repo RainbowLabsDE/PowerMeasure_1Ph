@@ -4,6 +4,7 @@
 #include "adc.h"
 #include "spi.h"
 #include "BL0942.h"
+#include <unistd.h>
 
 
 extern "C"
@@ -340,8 +341,9 @@ int modbus_lib_transport_write(uint8_t *buffer, uint16_t length)
 
 int main(void)
 {
-    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_2);
+    NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
     SysTickInit();
+    SDI_Printf_Enable();
     iwdg_setup(4095, IWDG_Prescaler_128); // prsc=128 -> 1kHz WDG Timer => reload_val ~= ms
     gpioInit();
     uart1.init();
@@ -362,6 +364,7 @@ int main(void)
     // config.load();
     spi.begin(SPI::MASTER_MODE,GPIOC,GPIO_Pin_1);
     BL0942 bl(spi);
+    bl.Reset();
 
     // rblb.setUid(getUID());
     // rblb.setDataCallback(rblbDataCallback);
@@ -388,6 +391,10 @@ int main(void)
             lastDataReceived = millis();
             modbus_lib_end_of_telegram();
         }
+
+        printfd("BL0942: %d\n", bl.read_I_WAVE());
+        delay(500);
+        
 
         // GPIO_WriteBit(PIN_LED1, Bit_SET);
         // delay(100);

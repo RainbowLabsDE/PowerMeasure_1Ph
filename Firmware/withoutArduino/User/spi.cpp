@@ -6,6 +6,8 @@ SPI::SPI()
 
 void SPI::begin(SPI_MODE mode, GPIO_TypeDef * csPort, uint16_t csPin)
 {
+    _csPort = csPort;
+    _csPin = csPin;
     GPIO_InitTypeDef GPIO_InitStructure = {0};
     SPI_InitTypeDef SPI_InitStructure = {0};
 
@@ -64,6 +66,7 @@ void SPI::begin(SPI_MODE mode, GPIO_TypeDef * csPort, uint16_t csPin)
 
 void SPI::SPISendBytes(uint8_t *sendData, uint32_t length)
 {
+    GPIO_ResetBits(_csPort, _csPin);
     uint32_t loop = 0;
     uint8_t tmp = 0;
     for (loop = 0; loop < length; loop++)
@@ -78,10 +81,12 @@ void SPI::SPISendBytes(uint8_t *sendData, uint32_t length)
             ; // wait while flag is zero or RX buffer is empty
         tmp = SPI_I2S_ReceiveData(SPI1);
     }
+    GPIO_SetBits(_csPort, _csPin);
 }
 
 void SPI::SPIReceiveBytes(uint8_t *getData, uint32_t length)
 {
+    GPIO_ResetBits(_csPort, _csPin);
     uint32_t loop = 0;
     for (loop = 0; loop < length; loop++)
     {
@@ -95,10 +100,12 @@ void SPI::SPIReceiveBytes(uint8_t *getData, uint32_t length)
             ; // wait while flag is zero or RX buffer is empty
         getData[loop] = SPI_I2S_ReceiveData(SPI1);
     }
+    GPIO_SetBits(_csPort, _csPin);
 }
 
 void SPI::SPISendReceiveBytes(uint8_t *sendData, uint8_t *getData, uint32_t length)
 {
+    GPIO_ResetBits(_csPort, _csPin);
     uint32_t loop = 0;
     for (loop = 0; loop < length; loop++)
     {
@@ -112,4 +119,5 @@ void SPI::SPISendReceiveBytes(uint8_t *sendData, uint8_t *getData, uint32_t leng
             ; // wait while flag is zero or RX buffer is empty
         getData[loop] = SPI_I2S_ReceiveData(SPI1);
     }
+    GPIO_SetBits(_csPort, _csPin);
 }

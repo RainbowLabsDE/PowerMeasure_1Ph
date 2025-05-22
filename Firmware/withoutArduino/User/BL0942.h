@@ -9,6 +9,7 @@ class BL0942
 {
 public:
     BL0942(SPI &spi);
+    
 
     struct SystemStatus
     {
@@ -32,15 +33,17 @@ public:
 
     void Reset();
 
+    static const int32_t INVALID_DATA = INT32_MAX;
+
 private:
     SPI &_spi;
-    enum IniByte
+    enum IniByte : uint8_t
     {
         Read = 0x58,
         Write = 0xa8
     };
 
-    enum RegAdress
+    enum RegAdress : uint8_t
     { /********** Read-only register ************/
       I_WAVE = 0x01,
       V_WAVE = 0x02,
@@ -62,14 +65,27 @@ private:
       GAIN_CR = 0x1A,
       SOFT_RESET = 0x1C,
       USR_WRPROT = 0x1D
-
     };
 
-    uint8_t *sendCommand(IniByte command, RegAdress adresse, const uint8_t *data);
-    uint8_t calculateChecksum(uint8_t *data);
-    bool checkCRC(uint8_t *data);
-    uint32_t  combineBytes(uint8_t byte1, uint8_t byte2, uint8_t byte3);
-    int32_t  combineBytes(int8_t byte1, int8_t byte2, int8_t byte3);
+    typedef struct {
+        IniByte command;
+        RegAdress address;
+        uint8_t data[3];
+        uint8_t crc;
+    } frame_t;
+    static_assert(sizeof(frame_t) == 6, "Wrong struct packing size, should be 6 bytes in size");
+
+    uint8_t *sendCommand(frame_t frame);
+    uint8_t calculateChecksum(frame_t* frame);
+    bool checkCRC(frame_t* frame);
+    uint32_t combineBytes(uint8_t byte1, uint8_t byte2, uint8_t byte3);
+    int32_t combineBytes(int8_t byte1, int8_t byte2, int8_t byte3);
+    int32_t rawToValue(uint8_t* data, uint8_t significantBits, bool signExtend);
+    int32_t readVal(RegAdress addr, uint8_t significantBits, bool signExtend);
+
+
+    uint8_t _receivedData[6] = {0};
+
 };
 
 #endif // BL0942_H

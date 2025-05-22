@@ -32,8 +32,8 @@ public:
 
 
 private:
+   GPIO_TypeDef* _csPort;
    uint16_t _csPin;
-   uint16_t _csPort;
    SPI_MODE _mode;
 };
 
