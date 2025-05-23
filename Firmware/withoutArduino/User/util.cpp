@@ -187,3 +187,9 @@ int flashOBRead(uint8_t *dst, size_t size) {
     memcpy(dst, buf, size);
     return 0;
 }
+
+#define DEBUG_DATA0_ADDRESS  ((volatile uint32_t*)0xE00000F4)
+void SDI_Printf_Enable_NoSysDelay() {
+    *(DEBUG_DATA0_ADDRESS) = 0;
+    delay(1);
+}

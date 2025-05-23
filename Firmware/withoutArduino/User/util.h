@@ -49,3 +49,6 @@ static void iwdg_setup(uint16_t reload_val, uint8_t prescaler) {
 static void iwdg_feed() {
 	IWDG->CTLR = 0xAAAA;
 }
+
+// SDI Printf Enable, but without the built-in delay, because that breaks the SysTick timer
+void SDI_Printf_Enable_NoSysDelay();

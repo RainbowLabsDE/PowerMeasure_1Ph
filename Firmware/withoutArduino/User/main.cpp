@@ -19,9 +19,9 @@ extern "C"
 // DE - PD3
 // RE - PD2 (active low)
 /********* Led und Button **********/
-// State LED R - PC1
-// State LED G - PC1
-// State LED B - PC1
+// State LED R - PC4
+// State LED G - PC3
+// State LED B - PC2
 // Button - PD0
 /********* Stommessung *********/
 // OP_neg - PA1
@@ -33,8 +33,9 @@ extern "C"
 // MISO - PC7
 // CS - PC1
 
-#define PIN_LED1 GPIOC, GPIO_Pin_1
-#define PIN_LED2 GPIOC, GPIO_Pin_2
+#define PIN_LEDR GPIOC, GPIO_Pin_4
+#define PIN_LEDG GPIOC, GPIO_Pin_3
+#define PIN_LEDB GPIOC, GPIO_Pin_2
 #define PIN_RS485_DE GPIOD, GPIO_Pin_3
 #define PIN_RS485_RE GPIOD, GPIO_Pin_2
 
@@ -149,15 +150,16 @@ uint32_t lastDataReceived = 0;
 void gpioInit()
 {
     GPIO_InitTypeDef gpioInitStruct = {
-        .GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_4 | GPIO_Pin_5,
+        .GPIO_Pin = GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 | GPIO_Pin_4 | GPIO_Pin_5,
         .GPIO_Speed = GPIO_Speed_50MHz,
         .GPIO_Mode = GPIO_Mode_Out_PP,
     };
     RCC_APB2PeriphClockCmd(RCC_APB2Periph_GPIOC, ENABLE);
     GPIO_Init(GPIOC, &gpioInitStruct);
 
-    GPIO_WriteBit(PIN_LED1, Bit_SET);       // turn off LED
-    GPIO_WriteBit(PIN_LED2, Bit_SET);       // turn off LED
+    GPIO_WriteBit(PIN_LEDR, Bit_SET);       // turn off LED
+    GPIO_WriteBit(PIN_LEDG, Bit_SET);       // turn off LED
+    GPIO_WriteBit(PIN_LEDB, Bit_SET);       // turn off LED
     GPIO_WriteBit(PIN_RS485_DE, Bit_RESET); // disable send
     GPIO_WriteBit(PIN_RS485_RE, Bit_RESET); // enable receive (active low)
 }
@@ -343,7 +345,7 @@ int main(void)
 {
     NVIC_PriorityGroupConfig(NVIC_PriorityGroup_1);
     SysTickInit();
-    SDI_Printf_Enable();
+    SDI_Printf_Enable_NoSysDelay();
     iwdg_setup(4095, IWDG_Prescaler_128); // prsc=128 -> 1kHz WDG Timer => reload_val ~= ms
     gpioInit();
     uart1.init();
@@ -392,14 +394,15 @@ int main(void)
             modbus_lib_end_of_telegram();
         }
 
-        printfd("BL0942: %d\n", bl.read_I_WAVE());
-        delay(500);
+        GPIO_WriteBit(PIN_LEDR, Bit_SET);
+        delay(100);
+        GPIO_WriteBit(PIN_LEDR, Bit_RESET);
+        delay(100);
+
+        printfd("BL0942 I: %4d\n", bl.read_I_WAVE());
+        // delay(500);
         
 
-        // GPIO_WriteBit(PIN_LED1, Bit_SET);
-        // delay(100);
-        // GPIO_WriteBit(PIN_LED1, Bit_RESET);
-        // delay(100);
 
         // if (millis() - lastPrint > 100) {
         //     lastPrint = millis();
